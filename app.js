@@ -15,11 +15,16 @@ var giphy = require( 'giphy' )( 'dc6zaTOxFJmzC' );
 var nodemailer = require("nodemailer");
 console.log(process.env.MY_PASSWORD);
 var smtpTransport = nodemailer.createTransport("SMTP",{
-   service: "Hotmail",
+   host: "smtp-mail.outlook.com", // hostname
+    secureConnection: false, // TLS requires secureConnection to be false
+    port: 587, // port for secure SMTP
    auth: {
        user: process.env.MY_EMAIL,
        pass: process.env.MY_PASSWORD
-   }
+   },
+    tls: {
+        ciphers:'SSLv3'
+    }
 });
 
 
