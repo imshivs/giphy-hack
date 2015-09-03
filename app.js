@@ -25,7 +25,7 @@ var smtpTransport = nodemailer.createTransport("SMTP",{
 
 // var job = new CronJob('*/60 * * * * *', this.email, true, 'America/San_Francisco');
 var CronJob = require('cron').CronJob;
-new CronJob('30 8 * * *', function() {
+new CronJob('*/2 * * * *', function() {
 	giphy.search({ 
 	q: 'baby animals', 
 	limit:100,
