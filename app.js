@@ -1,5 +1,5 @@
 require('dotenv').load();
-var CronJob = require('cron').CronJob;
+// var schedule = require('node-schedule');
 var giphy = require( 'giphy' )( 'dc6zaTOxFJmzC' );
 
 // giphy.trending({
@@ -23,30 +23,57 @@ var smtpTransport = nodemailer.createTransport("SMTP",{
 });
 
 
-var job = new CronJob('10 * * * * *', function() {
-
-	giphy.search({ q: 'pokemon', limit:100,
-	    rating: 'g'}, function (err, res) {
-	 
+// var job = new CronJob('*/60 * * * * *', this.email, true, 'America/San_Francisco');
+var CronJob = require('cron').CronJob;
+new CronJob('30 8 * * *', function() {
+	giphy.search({ 
+	q: 'baby animals', 
+	limit:100,
+	rating: 'g'
+	}, function (err, res) { 
 	    var gifs = res.data;
 	    var gif = gifs[Math.floor(Math.random()*gifs.length)];
 	    console.log("here");
 
 	    smtpTransport.sendMail({
-	   from: process.env.MY_EMAIL, // sender address
-	   to: "negishivs@gmail.com", // comma separated list of receivers
-	   subject: "DAILY GIF ✔", // Subject line
-	   text: gif.images.downsized_large.url // plaintext body
-	}, function(error, response){
-	   if(error){
-	       console.log(error);
-	   }else{
-	       console.log("Message sent: " + response.message);
-	   }
-});
-})
+		   from: process.env.MY_EMAIL, // sender address
+		   to: "negishivs@gmail.com", // comma separated list of receivers
+		   subject: "DAILY GIF ✔", // Subject line
+		   text: gif.images.downsized_large.url // plaintext body
+		}, function(error, response){
+		   if(error){
+		       console.log(error);
+		   }else{
+		       console.log("Message sent: " + response.message);
+		   }
+		});
+	});
 
-	  , true,
-  'America/San_Francisco'
-});
+}, null, true, 'America/Los_Angeles');
+
+var email = function(){
+
+giphy.search({ 
+	q: 'pokemon', 
+	limit:100,
+	rating: 'g'
+	}, function (err, res) { 
+	    var gifs = res.data;
+	    var gif = gifs[Math.floor(Math.random()*gifs.length)];
+	    console.log("here");
+
+	    smtpTransport.sendMail({
+		   from: process.env.MY_EMAIL, // sender address
+		   to: "negishivs@gmail.com", // comma separated list of receivers
+		   subject: "DAILY GIF ✔", // Subject line
+		   text: gif.images.downsized_large.url // plaintext body
+		}, function(error, response){
+		   if(error){
+		       console.log(error);
+		   }else{
+		       console.log("Message sent: " + response.message);
+		   }
+		});
+	});
+}
 // });
