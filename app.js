@@ -15,7 +15,7 @@ var giphy = require( 'giphy' )( 'dc6zaTOxFJmzC' );
 var nodemailer = require("nodemailer");
 console.log(process.env.MY_PASSWORD);
 var smtpTransport = nodemailer.createTransport("SMTP",{
-   service: "Gmail",
+   service: "Hotmail",
    auth: {
        user: process.env.MY_EMAIL,
        pass: process.env.MY_PASSWORD
