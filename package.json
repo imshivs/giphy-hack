@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "dotenv": "*",
-    "nodemailer":"*",
+    "nodemailer":"0.7.1",
     "giphy": "*",
     "cron":"*"
   },
